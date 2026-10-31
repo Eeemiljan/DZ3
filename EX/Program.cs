@@ -4,17 +4,46 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine("Упражнение 4.1. Определение даты по номеру дня.");
-        Console.WriteLine("Упражнение 4.2. Проверка правильности номера дня.");
+        Console.WriteLine("Домашнее задание 4.1. Определение даты с учетом високосного года.");
 
         try
         {
-            Console.Write("Введите номер дня от 1 до 365: ");
+            Console.Write("Введите год: ");
+            int year = int.Parse(Console.ReadLine());
+
+            Console.Write("Введите номер дня в году: ");
             int number = int.Parse(Console.ReadLine());
 
-            if (number < 1 || number > 365)
+            bool leapYear = false;
+
+            if (year % 400 == 0)
             {
-                throw new Exception("Номер дня должен быть от 1 до 365!");
+                leapYear = true;
+            }
+            else if (year % 100 == 0)
+            {
+                leapYear = false;
+            }
+            else if (year % 4 == 0)
+            {
+                leapYear = true;
+            }
+
+            int extraDay = 0;
+
+            if (leapYear)
+            {
+                extraDay = 1;
+                Console.WriteLine("Год високосный.");
+            }
+            else
+            {
+                Console.WriteLine("Год не високосный.");
+            }
+
+            if (number < 1 || number > 365 + extraDay)
+            {
+                throw new Exception("Неверный номер дня!");
             }
 
             int start = 0;
@@ -25,65 +54,65 @@ class Program
                 month = "января";
                 start = 0;
             }
-            else if (number <= 59)
+            else if (number <= 59 + extraDay)
             {
                 month = "февраля";
                 start = 31;
             }
-            else if (number <= 90)
+            else if (number <= 90 + extraDay)
             {
                 month = "марта";
-                start = 59;
+                start = 59 + extraDay;
             }
-            else if (number <= 120)
+            else if (number <= 120 + extraDay)
             {
                 month = "апреля";
-                start = 90;
+                start = 90 + extraDay;
             }
-            else if (number <= 151)
+            else if (number <= 151 + extraDay)
             {
                 month = "мая";
-                start = 120;
+                start = 120 + extraDay;
             }
-            else if (number <= 181)
+            else if (number <= 181 + extraDay)
             {
                 month = "июня";
-                start = 151;
+                start = 151 + extraDay;
             }
-            else if (number <= 212)
+            else if (number <= 212 + extraDay)
             {
                 month = "июля";
-                start = 181;
+                start = 181 + extraDay;
             }
-            else if (number <= 243)
+            else if (number <= 243 + extraDay)
             {
                 month = "августа";
-                start = 212;
+                start = 212 + extraDay;
             }
-            else if (number <= 273)
+            else if (number <= 273 + extraDay)
             {
                 month = "сентября";
-                start = 243;
+                start = 243 + extraDay;
             }
-            else if (number <= 304)
+            else if (number <= 304 + extraDay)
             {
                 month = "октября";
-                start = 273;
+                start = 273 + extraDay;
             }
-            else if (number <= 334)
+            else if (number <= 334 + extraDay)
             {
                 month = "ноября";
-                start = 304;
+                start = 304 + extraDay;
             }
             else
             {
                 month = "декабря";
-                start = 334;
+                start = 334 + extraDay;
             }
 
             int day = number - start;
 
-            Console.WriteLine($"Дата: {day} {month}");
+            Console.WriteLine($"Дата: {day} {month} {year} года");
         }
         catch (Exception error)
         {
